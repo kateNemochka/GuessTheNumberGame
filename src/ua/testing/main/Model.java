@@ -6,25 +6,50 @@ import java.util.Random;
 public class Model implements Constants {
     private int randMin;
     private int randMax;
-    private int numToGuess;
+    private int numberToGuess;
+    private ArrayList<Integer> statistics = new ArrayList<>();
 
     public Model() {
         randMin = RAND_MIN;
         randMax = RAND_MAX;
+        numberToGuess = rand();
+    }
+
+    public int getRandMin() {
+        return randMin;
+    }
+
+    public void setRandMin(int randMin) {
+        this.randMin = randMin;
+    }
+
+    public int getRandMax() {
+        return randMax;
+    }
+
+    public void setRandMax(int randMax) {
+        this.randMax = randMax;
+    }
+
+    public int getNumberToGuess() {
+        return numberToGuess;
+    }
+
+    public ArrayList<Integer> getStatistics() {
+        return statistics;
     }
 
     public int rand() {
-        numToGuess = new Random().nextInt(RAND_MAX + 1);
-        return numToGuess;
-    }
-    public int rand(int min, int max) throws Exception {
-        if (min > max)
-            throw new Exception("Wrong random number ranges: min argument should be less than max argument");
-        numToGuess = new Random().nextInt(max - min + 1) + min;
-        return numToGuess;
+        return rand(Constants.RAND_MIN, Constants.RAND_MAX);
     }
 
+    public int rand(int min, int max) {
+        numberToGuess = new Random().nextInt(max - min + 1) + min;
+        return numberToGuess;
+    }
 
-
+    public void addUserGuessNumber(int number) {
+        statistics.add(number);
+    }
 
 }
