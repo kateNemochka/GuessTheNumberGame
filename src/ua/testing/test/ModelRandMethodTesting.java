@@ -8,12 +8,12 @@ import java.util.Set;
 
 import static org.junit.Assert.*;
 
-public class ModelTester {
+public class ModelRandMethodTesting {
     Model model = new Model();
     int randomNumber = 0;
 
     @Test
-    public void generatedRandomNumberBounds_0_0__get0() {
+    public void generatedRandomNumberBounds0And0Get0() {
         assertEquals(model.rand(0, 0), 0);
     }
 

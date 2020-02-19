@@ -3,53 +3,54 @@ package ua.testing.main;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Model implements Constants {
-    private int randMin;
-    private int randMax;
-    private int numberToGuess;
-    private ArrayList<Integer> statistics = new ArrayList<>();
+public class Model implements ModelConstants {
+    private int rangeMin;
+    private int rangeMax;
+    private int secretNumber;
+    private ArrayList<Integer> attempts = new ArrayList<>();
 
     public Model() {
-        randMin = RAND_MIN;
-        randMax = RAND_MAX;
-        numberToGuess = rand();
+        rangeMin = RAND_MIN;
+        rangeMax = RAND_MAX;
+        secretNumber = rand();
     }
 
-    public int getRandMin() {
-        return randMin;
+    public int getRangeMin() {
+        return rangeMin;
     }
 
-    public void setRandMin(int randMin) {
-        this.randMin = randMin;
+    public int getRangeMax() {
+        return rangeMax;
     }
 
-    public int getRandMax() {
-        return randMax;
+    public int getSecretNumber() {
+        return secretNumber;
     }
 
-    public void setRandMax(int randMax) {
-        this.randMax = randMax;
+    public ArrayList<Integer> getAttempts() {
+        return attempts;
     }
 
-    public int getNumberToGuess() {
-        return numberToGuess;
-    }
-
-    public ArrayList<Integer> getStatistics() {
-        return statistics;
-    }
 
     public int rand() {
-        return rand(Constants.RAND_MIN, Constants.RAND_MAX);
+        return rand(ModelConstants.RAND_MIN, ModelConstants.RAND_MAX);
     }
 
     public int rand(int min, int max) {
-        numberToGuess = new Random().nextInt(max - min + 1) + min;
-        return numberToGuess;
+        secretNumber = new Random().nextInt(max - min + 1) + min;
+        return secretNumber;
     }
 
-    public void addUserGuessNumber(int number) {
-        statistics.add(number);
+
+    public boolean isSecret(int number) {
+        attempts.add(number);
+        if (number == secretNumber)
+            return true;
+        else if (number < secretNumber)
+            this.rangeMin = number;
+        else
+            this.rangeMax = number;
+        return false;
     }
 
 }
